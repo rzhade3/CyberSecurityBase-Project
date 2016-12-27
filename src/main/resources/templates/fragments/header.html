@@ -9,22 +9,22 @@
 
 <body>
     <div th:fragment="notLoggedIn">
-        <div class="fixed-navbar">
+        <div class="top-navbar">
             <ul>
-                <li class="logo"><a th:href="@{/main}">Plebbit</a></li>
-                <li id="signIn"><a th:href="@{/login}">Log In</a></li>
-                <li id="signIn"><a th:href="@{/signup}">Sign Up</a></li>
+                <li id="logo"><a th:href="@{/main}">Plebbit</a></li>
+                <li class="rightJust"><a th:href="@{/login}">Log In</a></li>
+                <li class="rightJust"><a th:href="@{/signup}">Sign Up</a></li>
                 <li><a th:href="@{/account}"><span th:text="${username}"></span></a></li>
             </ul>
         </div>
     </div>
     
     <div th:fragment="loggedIn">
-        <div class="fixed-navbar">
+        <div class="top-navbar">
             <ul>
-                <li class="logo"><a th:href="@{/main}">Plebbit</a></li>
-                <li><a th:href="@{/account}"><span th:text="${username}"></span></a></li>
-                <li><a th:href="@{/signout}">Sign Out</a></li>
+                <li id="logo"><a th:href="@{/main}">Plebbit</a></li>
+                <li class="rightJust"><a th:href="@{/account}"><span th:text="${username}"></span></a></li>
+                <li class="rightJust"><a th:href="@{/signout}">Sign Out</a></li>
             </ul>
         </div>
     </div>

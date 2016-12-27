@@ -30,7 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public void init() {
         // Creating two accounts here for testing
         Account account = new Account();
-        account.setUsername("theo");
+        account.setUsername("Theo");
         account.setPassword(encoder.encode("saysHi"));
         accountRepository.save(account);
         
