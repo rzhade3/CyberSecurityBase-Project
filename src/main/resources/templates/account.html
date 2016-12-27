@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Plebbit</title>
+	<meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0"/>
+	<meta name="description" content="Insecure Web Application for CyberSecurityBase"/>
+    </head>
+    <body>
+        <div th:replace="fragments/header :: loggedIn">
+            <p> Navbar goes here </p>
+        </div>
+
+        <h1> My Account </h1>
+        <ul>
+            <li><a th:href="@{/change}">Change My Password</a></li>
+            <li><a th:href="@{/newpost}">New Post</a></li>
+        </ul>
+
+        <ul>
+            <!-- If you're looking through the code, this is the location of 
+            the XSS vulnerability (instead of having a text element, there is a 
+            utext element, which introduces the vulnerability -->
+            <li th:each="post : ${posts}">
+                <span th:utext="${post.title}">TITLE</span>
+                <br/> 
+                <span th:utext="${post.content}">Content</span>
+                <br/>
+            </li>
+        </ul>
+
+    </body>
+</html>

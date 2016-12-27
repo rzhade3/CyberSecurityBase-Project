@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Plebbit</title>
+    	<meta charset="UTF-8"/>
+    	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0"/>
+    	<meta name="description" content="Insecure Web Application for CyberSecurityBase"/>
+    </head>
+    <body>
+        <div th:replace="fragments/header :: notLoggedIn">
+            <p> Navbar goes here </p>
+        </div>
+
+        <h1> Create a new Post </h1>
+        <form th:action="@{/newpost}" th:method="POST">
+            <p> Title </p> <input type="text" name="title"/>
+            <p> Content </p> <input type="text" name="content"/>
+            <br/>
+            <input type="submit" value="Post"/>
+        </form>
+
+    </body>
+</html>

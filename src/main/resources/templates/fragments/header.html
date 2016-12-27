@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+        <title>Plebbit</title>
+	<meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0"/>
+	<meta name="description" content="Insecure Web Application for CyberSecurityBase"/>
+</head>
+
+<body>
+    <div th:fragment="notLoggedIn">
+        <div class="fixed-navbar">
+            <ul>
+                <li class="logo"><a th:href="@{/main}">Plebbit</a></li>
+                <li id="signIn"><a th:href="@{/login}">Log In</a></li>
+                <li id="signIn"><a th:href="@{/signup}">Sign Up</a></li>
+                <li><a th:href="@{/account}"><span th:text="${username}"></span></a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div th:fragment="loggedIn">
+        <div class="fixed-navbar">
+            <ul>
+                <li class="logo"><a th:href="@{/main}">Plebbit</a></li>
+                <li><a th:href="@{/account}"><span th:text="${username}"></span></a></li>
+                <li><a th:href="@{/signout}">Sign Out</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
