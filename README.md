@@ -23,6 +23,8 @@ In later versions, I will be introducing [insecure direct object references](htt
 
 Fixing most of these vulnerabilities is a cinch because of Spring Security. Most of these problems can be rectified with a few lines of code in the Security Configuration file.
 * CSRF
+   
    To fix the CSRF problem, enable CSRF tokens in the application. This can be done by commenting out this line: `http.csrf().disable();` from the SecurityConfiguration.java file, and by manually adding CSRF tokens, by adding this line of HTML: `<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>` to each of the POST forms in this application.
 * XSS 
+
    To fix the XSS vulnerability, simply change the `th:utext` attributes in the main template to `th:text` attributes instead.   This treats the inputted text as text, instead of allowing scripting in the input fields.
