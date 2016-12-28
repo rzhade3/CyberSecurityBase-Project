@@ -2,6 +2,7 @@ package sec.project.controller;
 
 import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,20 +25,18 @@ public class AccountController {
     public String addAccount(@RequestParam String username, @RequestParam String password) {
         Account account = new Account();
         account.setUsername(username);
-        //account.setPassword(encoder.encode(password));
-        // Using the plaintext rather than the encoded form of the password opens
-        // up another attack vector.
-        account.setPassword(password);
+
+        account.setPassword(encoder.encode(password));
+        account.setRole("USER");
         accountRepository.save(account);
         return "redirect:/login";
     }
     
     @RequestMapping(value = "/change", method = RequestMethod.PATCH)
-    public String changePassword(Principal principal, @RequestParam String password) {
-        String name = principal.getName();
+    public String changePassword(Authentication auth, @RequestParam String password) {
+        String name = auth.getName();
         Account account = accountRepository.findByUsername(name);
-        // account.setPassword(encoder.encode(password));
-        account.setPassword(password);
+        account.setPassword(encoder.encode(password));
         accountRepository.save(account);
         return "redirect:/main";
     }
