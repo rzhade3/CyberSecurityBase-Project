@@ -4,7 +4,11 @@
 
 This is my project for the Cybersecurity Base MOOC at the University of Helsinki. This web application is a deliberately insecure social networking platform, with functionality resembling that of Reddit or Hacker News.
 
-To install this application, clone into the repo, and run the program on a local server with maven. There are two users created when the application initializes for testing purposes, so to do any testing, login as **Theo** with the password *saysHi*, or as **Bubba** with the password *GumpShrimp*.
+To install this application, clone into the repo, and run the program on a local server with maven, by entering the directory through Command Prompt or Terminal, and running the command `mvn spring-boot:run`. There are two users created when the application initializes for testing purposes, so to do any testing, login as **Theo** with the password *saysHi*, or as **Bubba** with the password *GumpShrimp*. Or, if you would prefer, there is also functionality to create your own account.
+
+### Notes about Website
+
+It should be noted that this application was created primarily as a security testing apparatus, so there may be a few errors in the business logic here and there. Currently, the most glaring issue is that upon server reset, the application does not redirect from whatever page you were on to the login/ main page, often creating null pointer exceptions. Until I get around to fixing this, a good fix is to manually go back to the main page from whatever error page you are on.
 
 ### Description of Vulnerabilies
 
@@ -28,3 +32,4 @@ Fixing most of these vulnerabilities is a cinch because of Spring Security. Most
 * XSS 
 
    To fix the XSS vulnerability, simply change the `th:utext` attributes in the main template to `th:text` attributes instead.   This treats the inputted text as text, instead of allowing scripting in the input fields.
+   
