@@ -6,11 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import sec.project.repository.AccountRepository;
 
 @Controller
 public class MainViewController {
 
-
+    @Autowired
+    private AccountRepository accountRepository;
+    
     @RequestMapping("*")
     public String defaultMapping() {
         return "redirect:/main";
@@ -26,6 +29,7 @@ public class MainViewController {
         if (principal != null) {
             String name = principal.getName();
             model.addAttribute("username", name);
+            model.addAttribute("posts", accountRepository.findByUsername(name).getPosts());
         }
         return "account";
     }
@@ -55,11 +59,11 @@ public class MainViewController {
     
     @RequestMapping(value = "/change", method = RequestMethod.GET)
     public String changeMapping(Model model, Principal principal) {
-        Object principal;
         if (principal != null) {
             String name = principal.getName();
             model.addAttribute("username", name);
+            return "change";
         }
-        return "change";
+        return "redirect:/main";
     }
 }

@@ -19,15 +19,25 @@
             <li><a th:href="@{/newpost}">New Post</a></li>
         </ul>
 
+        <h3> My Posts </h3>
         <ul>
+            <li th:if="${posts.empty}">
+                <span>No Posts :(</span>
+            </li>
             <!-- If you're looking through the code, this is the location of 
             the XSS vulnerability (instead of having a text element, there is a 
             utext element, which introduces the vulnerability -->
             <li th:each="post : ${posts}">
                 <span th:utext="${post.title}">TITLE</span>
-                <br/> 
+                <br/>
                 <span th:utext="${post.content}">Content</span>
                 <br/>
+                <form th:action="@{/editpost/{id}(id=${post.id})}" th:method="GET">
+                    <input type="submit" value="Edit Post"/>
+                </form>
+                <form th:action="@{/editpost/{id}(id=${post.id})}" th:method="Delete">
+                    <input type="submit" value="Delete Post"/>
+                </form>
             </li>
         </ul>
 

@@ -25,6 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         
         // no real security at the moment
         http.authorizeRequests()
+                .antMatchers("/account").authenticated()
                 .anyRequest().permitAll();
         
         http.formLogin().permitAll()
