@@ -32,18 +32,26 @@ public class CustomUserDetailsService implements UserDetailsService {
         Account account = new Account();
         account.setUsername("Theo");
         account.setPassword(encoder.encode("saysHi"));
+        account.setRole("USER");
         accountRepository.save(account);
         
         account = new Account();
         account.setUsername("Bubba");
         account.setPassword(encoder.encode("GumpShrimp"));
+        account.setRole("USER");
+        accountRepository.save(account);
+        
+        account = new Account();
+        account.setUsername("Admin");
+        account.setPassword(encoder.encode("admin"));
+        account.setRole("ADMIN");
         accountRepository.save(account);
         
         Post post = new Post();
         post.setTitle("Hello World!");
         post.setContent("Hey guys! This post is a placeholder so the page " +
                 "boring when you first come in!");
-        post.setAccount(accountRepository.findByUsername("theo"));
+        post.setAccount(accountRepository.findByUsername("Theo"));
         postRepository.save(post);
     }
 
@@ -53,7 +61,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (account == null) {
             throw new UsernameNotFoundException("No such user: " + username);
         }
-
         return new org.springframework.security.core.userdetails.User(
                 account.getUsername(),
                 account.getPassword(),
@@ -61,6 +68,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 true,
                 true,
                 true,
-                Arrays.asList(new SimpleGrantedAuthority("USER")));
+                Arrays.asList(new SimpleGrantedAuthority(account.getRole())));
     }
 }

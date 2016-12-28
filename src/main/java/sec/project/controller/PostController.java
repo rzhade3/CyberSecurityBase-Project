@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import sec.project.domain.Account;
 import sec.project.repository.AccountRepository;
 
 @Controller
@@ -30,6 +31,18 @@ public class PostController {
             model.addAttribute("username", name);
         }
         return "main";
+    }
+    
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
+    public String accountMapping(Model model, Principal principal) {
+        Account account = accountRepository.findByUsername(principal.getName());
+        model.addAttribute("username", account.getUsername());
+        if (account.getRole().equals("ADMIN")) {
+            model.addAttribute("posts", postRepository.findAll());
+        } else {
+            model.addAttribute("posts", account.getPosts());
+        }
+        return "account";
     }
     
     @RequestMapping(value = "/newpost", method = RequestMethod.POST)

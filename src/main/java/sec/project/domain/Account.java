@@ -12,6 +12,7 @@ public class Account extends AbstractPersistable<Long> {
     @Column(unique = true)
     private String username;
     private String password;
+    private String role;
 
     @OneToMany(mappedBy = "account")
     private List<Post> posts;
@@ -38,6 +39,14 @@ public class Account extends AbstractPersistable<Long> {
 
     public void setPosts(List<Post> posts) {
     	this.posts = posts;
+    }
+    
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
+    public String getRole() {
+        return role;
     }
 
 }

@@ -24,7 +24,10 @@ public class AccountController {
     public String addAccount(@RequestParam String username, @RequestParam String password) {
         Account account = new Account();
         account.setUsername(username);
-        account.setPassword(encoder.encode(password));
+        //account.setPassword(encoder.encode(password));
+        // Using the plaintext rather than the encoded form of the password opens
+        // up another attack vector.
+        account.setPassword(password);
         accountRepository.save(account);
         return "redirect:/login";
     }
@@ -33,7 +36,8 @@ public class AccountController {
     public String changePassword(Principal principal, @RequestParam String password) {
         String name = principal.getName();
         Account account = accountRepository.findByUsername(name);
-        account.setPassword(encoder.encode(password));
+        // account.setPassword(encoder.encode(password));
+        account.setPassword(password);
         accountRepository.save(account);
         return "redirect:/main";
     }

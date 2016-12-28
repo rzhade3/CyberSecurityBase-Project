@@ -29,16 +29,6 @@ public class MainViewController {
         return "login";
     }
     
-    @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String accountMapping(Model model, Principal principal) {
-        if (principal != null) {
-            String name = principal.getName();
-            model.addAttribute("username", name);
-            model.addAttribute("posts", accountRepository.findByUsername(name).getPosts());
-        }
-        return "account";
-    }
-    
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String signupMapping(Model model, Principal principal) {
         if (principal != null) {
@@ -49,7 +39,7 @@ public class MainViewController {
     }
 
     @RequestMapping(value = "/newpost", method = RequestMethod.GET)
-    public String postMapping(Model model, Principal principal) {
+    public String newPostMapping(Model model, Principal principal) {
         if (principal != null) {
             String name = principal.getName();
             model.addAttribute("username", name);
