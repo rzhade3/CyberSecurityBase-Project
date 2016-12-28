@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Plebbit</title>
+    	<meta charset="UTF-8"/>
+    	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0"/>
+    	<meta name="description" content="Insecure Web Application for CyberSecurityBase"/>
+        <link rel="stylesheet" type="text/css" media="all" href="/css/style.css" th:href="@{/css/style.css}"/>
+    </head>
+    <body>
+        <div th:replace="fragments/header :: notLoggedIn">
+            <p> Navbar goes here </p>
+        </div>
+
+        <h1> Edit Post </h1>
+        <h2> Title </h2>
+        <span th:each="post : ${shouldBeChanged}">
+            <span th:text="${post.title}"> Title </span>
+            <h2> Content </h2> 
+            <form th:action="@{/editpost/{id}(id=${post.id})}" th:method="PATCH">
+                <textarea name="content" rows="4" th:text="${post.content}">
+                    Content of message goes here
+                </textarea>
+                <br/>
+                <input type="submit" value="Submit"/>
+            </form>
+        </span>
+
+    </body>
+</html>
