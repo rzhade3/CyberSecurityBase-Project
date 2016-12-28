@@ -24,18 +24,18 @@ public class PostController {
     private AccountRepository accountRepository;
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public String list(Model model, Principal principal) {
+    public String list(Authentication auth, Model model) {
         model.addAttribute("posts", postRepository.findAll());
-        if (principal != null) {
-            String name = principal.getName();
+        if (auth != null) {
+            String name = auth.getName();
             model.addAttribute("username", name);
         }
         return "main";
     }
     
     @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public String accountMapping(Model model, Principal principal) {
-        Account account = accountRepository.findByUsername(principal.getName());
+    public String accountMapping(Authentication auth, Model model) {
+        Account account = accountRepository.findByUsername(auth.getName());
         model.addAttribute("username", account.getUsername());
         if (account.getRole().equals("ADMIN")) {
             model.addAttribute("posts", postRepository.findAll());
