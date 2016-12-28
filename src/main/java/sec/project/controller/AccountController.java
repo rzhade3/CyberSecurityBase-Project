@@ -1,8 +1,10 @@
 package sec.project.controller;
 
+import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,11 +21,20 @@ public class AccountController {
     private AccountRepository accountRepository;
     
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String addPost(@RequestParam String username, @RequestParam String password) {
+    public String addAccount(@RequestParam String username, @RequestParam String password) {
         Account account = new Account();
         account.setUsername(username);
         account.setPassword(encoder.encode(password));
         accountRepository.save(account);
         return "redirect:/login";
+    }
+    
+    @RequestMapping(value = "/change", method = RequestMethod.PATCH)
+    public String changePassword(Principal principal, @RequestParam String password) {
+        String name = principal.getName();
+        Account account = accountRepository.findByUsername(name);
+        account.setPassword(encoder.encode(password));
+        accountRepository.save(account);
+        return "redirect:/main";
     }
 }

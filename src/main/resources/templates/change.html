@@ -14,7 +14,7 @@
         </div>
         
         <h1> Change your password here </h1>
-        <form th:action="@{/change}" th:method="POST">
+        <form th:action="@{/change}" th:method="PATCH">
             <p> Password </p> <input type="password" name="password"/>
             <br/>
             <input type="submit" value="Change"/>
