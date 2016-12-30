@@ -1,5 +1,6 @@
 package sec.project.domain;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import org.springframework.data.jpa.domain.AbstractPersistable;

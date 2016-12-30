@@ -47,7 +47,7 @@ public class MainViewController {
         return "newPost";
     }
     
-    @RequestMapping(value = "/editpost", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String editPostMapping() {
         return "editPost";
     }

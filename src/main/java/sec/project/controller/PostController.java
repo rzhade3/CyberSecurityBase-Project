@@ -56,14 +56,14 @@ public class PostController {
     }
     
     // Returns the default edit post page
-    @RequestMapping(value = "/editpost/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editPost(Model model, @PathVariable long id) {
         Post post = postRepository.findOne(id);
         model.addAttribute("shouldBeChanged", post);
         return "editpost";
     }
     
-    @RequestMapping(value = "/editpost/{id}", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.PATCH)
     public String updatePost(@RequestParam String content, @PathVariable long id) {
         Post post = postRepository.findOne(id);
         post.setContent(content);
@@ -71,7 +71,7 @@ public class PostController {
         return "redirect:/account";
     }
     
-    @RequestMapping(value = "/editpost/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.DELETE)
     public String deletePost(@PathVariable long id) {
         postRepository.delete(id);
         return "redirect:/account";
