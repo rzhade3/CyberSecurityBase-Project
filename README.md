@@ -12,18 +12,15 @@ To install this application, clone into the repo, and run the program on a local
 
 It should be noted that this application was created primarily as a security testing apparatus, so there may be a few errors in the business logic here and there. Currently, the most glaring issue is that upon server reset, the application does not redirect from whatever page you were on to the login/ main page, often creating null pointer exceptions. Until I get around to fixing this, a good fix is to manually go back to the main page from whatever error page you are on.
 
-### Description of Vulnerabilies
+### Identification and Description of Vulnerabilies
 
-Since I built this application using Thymeleaf and Spring Security, creating security vulnerabilities in my application was sometimes more difficult than making a secure application. You might notice this while looking through the source code, as I give the exact location of where the vulnerability was introduced. For example, in the Security Configuration file, on line 24, I disabled CSRF protection, thus opening up the security vulnerability with one extra line of code. 
+Since I built this application using Thymeleaf and Spring Security, both quite security minded frameworks, creating security vulnerabilities in my application was sometimes more difficult than making a secure application. You might notice this while looking through the source code, as I give the exact location of where the vulnerability was introduced. For example, in the Security Configuration file, on line 24, I disabled CSRF protection, thus opening up the security vulnerability with one extra line of code. 
 
-The first insecurity is a lack of [CSRF](https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF)) tokens on the application, leading to a problem in places such as the password changing page of the application. Since the application does not even ask you to enter your last password, this is an ideal attack vector for any malicious agents. 
+The first insecurity is a lack of [CSRF](https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF)) tokens on the application, leading to a problem in places such as the password changing page of the application. This vulnerability can be noticed Since the application does not even ask you to enter your last password, this is an ideal attack vector for any malicious agents. 
 
 The second insecurity is the usage of unsigned text rather than signed text for displaying user- entered information. This allows users to embed HTML into the page (try entering `<script> alert("Hello World"); </script>` into one of the new post fields), creating an [XSS](https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_(XSS)) vulnerability, again opening up an attack vector.
 
 In later versions, I will be introducing [insecure direct object references](https://www.owasp.org/index.php/Top_10_2013-A4-Insecure_Direct_Object_References), [unvalidated redirects and forwards](https://www.owasp.org/index.php/Top_10_2013-A10-Unvalidated_Redirects_and_Forwards), and, perhaps, [injection](https://www.owasp.org/index.php/Top_10_2013-A1-Injection) attack vectors.
-
-### Identification of Vulnerabilities
-
 
 ### Fixing these Vulnerabilities
 
