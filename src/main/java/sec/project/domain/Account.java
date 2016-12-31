@@ -12,7 +12,7 @@ public class Account extends AbstractPersistable<Long> {
     @Column(unique = true)
     private String username;
     private String password;
-    private String role;
+    private boolean isAdmin;
 
     @OneToMany(mappedBy = "account")
     private List<Post> posts;
@@ -41,12 +41,12 @@ public class Account extends AbstractPersistable<Long> {
     	this.posts = posts;
     }
     
-    public void setRole(String role) {
-        this.role = role;
+    public void setAdmin() {
+        this.isAdmin = true;
     }
     
     public String getRole() {
-        return role;
+        return isAdmin ? "ADMIN" : "USER";
     }
 
 }

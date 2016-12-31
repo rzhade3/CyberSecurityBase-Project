@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Plebbit</title>
+	<meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0"/>
+	<meta name="description" content="Insecure Web Application for CyberSecurityBase"/>
+        <link rel="stylesheet" type="text/css" media="all" href="/css/style.css" th:href="@{/css/style.css}"/>
+    </head>
+    <body>
+        <div th:replace="fragments/header :: loggedIn">
+            <p> Navbar goes here </p>
+        </div>
+
+        <h1> Welcome Admin </h1>
+
+        <h3> Stickies </h3>
+        <ul>
+            <li th:if="${stickies.empty}">
+                <span>No Stickies</span>
+            </li>
+            <!-- If you're looking through the code, this is the location of 
+            the XSS vulnerability (instead of having a text element, there is a 
+            utext element, which introduces the vulnerability -->
+            <li th:each="sticky : ${stickies}">
+                <span th:utext="${sticky.title}">TITLE</span>
+                <br/>
+                <span th:utext="${sticky.content}">Content</span>
+                <br/>
+                <form th:action="@{/admin/{id}(id=${sticky.id})}" th:method="DELETE">
+                    <input type="submit" value="Remove Sticky"/>
+                </form>
+            </li>
+        </ul>
+        
+        <h3> All Posts </h3>
+        <ul>
+            <li th:if="${posts.empty}">
+                <span>No Posts :(</span>
+            </li>
+            <!-- If you're looking through the code, this is the location of 
+            the XSS vulnerability (instead of having a text element, there is a 
+            utext element, which introduces the vulnerability -->
+            <li th:each="post : ${posts}">
+                <span th:utext="${post.title}">TITLE</span>
+                <br/>
+                <span th:utext="${post.content}">Content</span>
+                <br/>
+                <form th:action="@{/edit/{id}(id=${post.id})}" th:method="GET">
+                    <input type="submit" value="Edit Post"/>
+                </form>
+                <form th:action="@{/edit/{id}(id=${post.id})}" th:method="Delete">
+                    <input type="submit" value="Delete Post"/>
+                </form>
+                <form th:action="@{/admin/{id}(id=${post.id})}" th:method="POST">
+                    <input type="submit" value="Add Sticky"/>
+                </form>
+            </li>
+        </ul>
+
+    </body>
+</html>

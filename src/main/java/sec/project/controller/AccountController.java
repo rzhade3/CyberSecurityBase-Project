@@ -27,7 +27,6 @@ public class AccountController {
         account.setUsername(username);
 
         account.setPassword(encoder.encode(password));
-        account.setRole("USER");
         accountRepository.save(account);
         return "redirect:/login";
     }

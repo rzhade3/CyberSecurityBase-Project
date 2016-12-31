@@ -32,19 +32,17 @@ public class CustomUserDetailsService implements UserDetailsService {
         Account account = new Account();
         account.setUsername("Theo");
         account.setPassword(encoder.encode("saysHi"));
-        account.setRole("USER");
         accountRepository.save(account);
         
         account = new Account();
         account.setUsername("Bubba");
         account.setPassword(encoder.encode("GumpShrimp"));
-        account.setRole("USER");
         accountRepository.save(account);
         
         account = new Account();
         account.setUsername("Admin");
         account.setPassword(encoder.encode("admin"));
-        account.setRole("ADMIN");
+        account.setAdmin();
         accountRepository.save(account);
         
         Post post = new Post();
