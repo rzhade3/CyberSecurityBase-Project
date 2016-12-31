@@ -2,9 +2,11 @@
 
 ### Introduction
 
-This is my project for the Cybersecurity Base MOOC at the University of Helsinki. This web application is a deliberately insecure social networking platform, with functionality resembling that of Reddit or Hacker News.
+This is my project for the Cybersecurity Base MOOC at the University of Helsinki. This web application is a deliberately insecure social networking platform, with functionality resembling that of Reddit or Hacker News. 
 
-To install this application, clone into the repo, and run the program on a local server with maven, by entering the directory through Command Prompt or Terminal, and running the command `mvn spring-boot:run`. There are two users created when the application initializes for testing purposes, so to do any testing, login as **Theo** with the password *saysHi*, or as **Bubba** with the password *GumpShrimp*. Or, if you would prefer, there is also functionality to create your own account.
+The logic of the site is fairly simple; users enter the site, and make posts. These posts can be edited at a later time by the user, or an admin, and can also be deleted by the admin. Admin privileges can be given by an admin to any user, but cannot be revoked. There are thus three tiers of users: anonymous browsers, who are limited to the main page, creating new accounts, and logging into the site, users, who are allowed to make posts, delete them, and edit them, and admins, who can do all of the above, and delete users and grant admin privileges. Of course, there are several problems that this application has with this logic, and this project will seek to point out and rectify these identified problems. 
+
+To install this application, clone into the repo, and run the program on a local server with maven, by entering the directory through Command Prompt or Terminal, and running the command `mvn spring-boot:run`. There are two users created when the application initializes for testing purposes, so to do any testing, login as **Theo** with the password *saysHi*, or as **Bubba** with the password *GumpShrimp*. For admin access, login as **Admin** with the password *admin*. Or, if you would prefer, there is also functionality to create your own account.
 
 ### Notes about Website
 
