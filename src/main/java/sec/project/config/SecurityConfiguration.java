@@ -25,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         
         // no real security at the moment
         http.authorizeRequests()
-                .antMatchers("/account", "/newpost", "/edit/**").authenticated()
+                .antMatchers("/account", "/newpost", "/edit/**", "/admin", "/admin/**", "/change").authenticated()
                 .anyRequest().permitAll();
         
         http.formLogin().permitAll()
