@@ -15,21 +15,21 @@
 
         <h1> Welcome Admin </h1>
 
-        <h3> Stickies </h3>
+        <h3> Users </h3>
         <ul>
-            <li th:if="${stickies.empty}">
-                <span>No Stickies</span>
+            <li th:if="${users.empty}">
+                <span>No Users to be found </span>
             </li>
-            <!-- If you're looking through the code, this is the location of 
-            the XSS vulnerability (instead of having a text element, there is a 
-            utext element, which introduces the vulnerability -->
-            <li th:each="sticky : ${stickies}">
-                <span th:utext="${sticky.title}">TITLE</span>
+
+            <li th:each="user : ${users}">
+                <span th:utext="${user.username}">Username</span>
                 <br/>
-                <span th:utext="${sticky.content}">Content</span>
-                <br/>
-                <form th:action="@{/admin/{id}(id=${sticky.id})}" th:method="DELETE">
-                    <input type="submit" value="Remove Sticky"/>
+                <form th:action="@{/admin/{id}(id=${user.id})}" th:method="DELETE">
+                    <input type="submit" value="Kick User"/>
+                </form>
+                
+                <form th:action="@{/admin/{id}(id=${user.id})}" th:method="POST">
+                    <input type="submit" value="Make Admin"/>
                 </form>
             </li>
         </ul>
@@ -50,11 +50,8 @@
                 <form th:action="@{/edit/{id}(id=${post.id})}" th:method="GET">
                     <input type="submit" value="Edit Post"/>
                 </form>
-                <form th:action="@{/edit/{id}(id=${post.id})}" th:method="Delete">
+                <form th:action="@{/edit/{id}(id=${post.id})}" th:method="DELETE">
                     <input type="submit" value="Delete Post"/>
-                </form>
-                <form th:action="@{/admin/{id}(id=${post.id})}" th:method="POST">
-                    <input type="submit" value="Add Sticky"/>
                 </form>
             </li>
         </ul>

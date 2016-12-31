@@ -48,7 +48,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         Post post = new Post();
         post.setTitle("Hello World!");
         post.setContent("Hey guys! This post is a placeholder so the page " +
-                "boring when you first come in!");
+                "isn't so boring when you first come in!");
         post.setAccount(accountRepository.findByUsername("Theo"));
         postRepository.save(post);
     }

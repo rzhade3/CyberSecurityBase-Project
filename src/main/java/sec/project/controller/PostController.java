@@ -25,6 +25,7 @@ public class PostController {
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String list(Authentication auth, Model model) {
+        model.addAttribute("authentication", auth);
         model.addAttribute("posts", postRepository.findAll());
         if (auth != null) {
             String name = auth.getName();
@@ -37,11 +38,7 @@ public class PostController {
     public String accountMapping(Authentication auth, Model model) {
         Account account = accountRepository.findByUsername(auth.getName());
         model.addAttribute("username", account.getUsername());
-        if (account.getRole().equals("ADMIN")) {
-            model.addAttribute("posts", postRepository.findAll());
-        } else {
-            model.addAttribute("posts", account.getPosts());
-        }
+        model.addAttribute("posts", account.getPosts());
         return "account";
     }
     
@@ -75,5 +72,14 @@ public class PostController {
     public String deletePost(@PathVariable long id) {
         postRepository.delete(id);
         return "redirect:/account";
+    }
+    
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String adminPage(Model model, Authentication auth) {
+        Account account = accountRepository.findByUsername(auth.getName());
+        model.addAttribute("username", account.getUsername());
+        model.addAttribute("users", accountRepository.findAll());
+        model.addAttribute("posts", postRepository.findAll());
+        return "admin";
     }
 }
