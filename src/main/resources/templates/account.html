@@ -17,6 +17,7 @@
         <ul>
             <li><a th:href="@{/change}">Change My Password</a></li>
             <li><a th:href="@{/newpost}">New Post</a></li>
+            <li th:if="${user.isAdmin()} == true"><a th:href="@{/admin}">Admin</a></li>
         </ul>
 
         <h3> My Posts </h3>
@@ -40,6 +41,9 @@
                 </form>
             </li>
         </ul>
-
+        
+        <div th:replace="fragments/header :: footer">
+            <p> The footer goes here </p>
+        </div>
     </body>
 </html>

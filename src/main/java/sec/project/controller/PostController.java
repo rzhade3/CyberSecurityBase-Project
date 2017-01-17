@@ -25,18 +25,22 @@ public class PostController {
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String list(Authentication auth, Model model) {
-        model.addAttribute("authentication", auth);
-        model.addAttribute("posts", postRepository.findAll());
         if (auth != null) {
+            model.addAttribute("authentication", auth);
+            model.addAttribute("posts", postRepository.findAll());
             String name = auth.getName();
             model.addAttribute("username", name);
+            return "authMain";
+        } else {
+            model.addAttribute("posts", postRepository.findAll());
+            return "main";
         }
-        return "main";
     }
     
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public String accountMapping(Authentication auth, Model model) {
         Account account = accountRepository.findByUsername(auth.getName());
+        model.addAttribute("user", account);
         model.addAttribute("username", account.getUsername());
         model.addAttribute("posts", account.getPosts());
         return "account";

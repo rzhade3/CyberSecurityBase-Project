@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" media="all" href="/css/style.css" th:href="@{/css/style.css}"/>
     </head>
     <body>
-        <div th:replace="fragments/header :: 'notLoggedIn'"></div>
+        <div th:replace="fragments/header :: 'loggedIn'"></div>
         
         <h1> Welcome to Plebbit </h1>
 
@@ -18,9 +18,9 @@
             the XSS vulnerability (instead of having a text element, there is a 
             utext element, which introduces the vulnerability -->
             <li th:each="post : ${posts}">
-                <span th:utext="${post.title}" class="title">TITLE</span>
+                <span th:utext="${post.title}">TITLE</span>
                 <br/> 
-                <span th:utext="${post.content}" class="content">Content</span>
+                <span th:utext="${post.content}">Content</span>
                 <br/>
                 <span th:text="${post.account.username}" class="user">Username</span>
             </li>

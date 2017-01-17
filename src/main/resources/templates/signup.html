@@ -13,13 +13,16 @@
             <p> Navbar goes here </p>
         </div>
 
-        <h1> Create a new account </h1>
+        <h1> Create a New Account </h1>
         <form th:action="@{/signup}" th:method="POST">
             <p> Username </p> <input type="text" name="username"/>
             <p> Password </p> <input type="password" name="password"/>
             <br/>
             <input type="submit" value="Create"/>
         </form>
-
+        
+        <div th:replace="fragments/header :: footer">
+            <p> The footer goes here </p>
+        </div>
     </body>
 </html>

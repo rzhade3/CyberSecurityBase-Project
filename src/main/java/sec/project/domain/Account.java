@@ -45,6 +45,10 @@ public class Account extends AbstractPersistable<Long> {
         this.isAdmin = true;
     }
     
+    public boolean isAdmin() {
+        return this.isAdmin;
+    }
+    
     public String getRole() {
         return isAdmin ? "ADMIN" : "USER";
     }
