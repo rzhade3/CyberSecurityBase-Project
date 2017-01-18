@@ -23,7 +23,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Here goes the CSRF security
         http.csrf().disable();
         
-        // no real security at the moment
         http.authorizeRequests()
                 .antMatchers("/account", "/newpost", "/edit/**", "/admin", "/admin/**", "/change").authenticated()
                 .anyRequest().permitAll();

@@ -50,7 +50,7 @@ public class Account extends AbstractPersistable<Long> {
     }
     
     public String getRole() {
-        return isAdmin ? "ADMIN" : "USER";
+        return isAdmin ? "ROLE_ADMIN" : "ROLE_USER";
     }
 
 }
