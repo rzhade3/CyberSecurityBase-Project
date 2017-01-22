@@ -64,7 +64,7 @@ public class PostController {
         return "editpost";
     }
     
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     public String updatePost(@RequestParam String content, @PathVariable long id) {
         Post post = postRepository.findOne(id);
         post.setContent(content);

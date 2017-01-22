@@ -17,3 +17,8 @@
 .active {
     background-color: #4CAF50;
 }
+
+h1 {
+    text-align: center;
+    padding-bottom: 15px;
+}

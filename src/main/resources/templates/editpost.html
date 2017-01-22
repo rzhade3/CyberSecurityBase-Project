@@ -8,12 +8,12 @@
             <p> Navbar goes here </p>
         </div>
 
-        <h1> Edit a Post </h1>
+        <h1> Edit Post </h1>
         <h2> Title </h2>
         <span th:each="post : ${shouldBeChanged}">
             <span th:text="${post.title}"> Title </span>
             <h2> Content </h2> 
-            <form th:action="@{/edit/{id}(id=${post.id})}" th:method="PATCH">
+            <form th:action="@{/edit/{id}(id=${post.id})}" th:method="POST">
                 <textarea name="content" rows="4" th:text="${post.content}">
                     Content of message goes here
                 </textarea>
