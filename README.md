@@ -16,19 +16,17 @@ It should be noted that this application was created primarily as a security tes
 
 Since I built this application using Thymeleaf and Spring Security, both quite security minded frameworks, creating security vulnerabilities in my application was sometimes more difficult than making a secure application. You might notice this while looking through the source code, as I give the exact location of where the vulnerability was introduced. For example, in the Security Configuration file, on line 24, I disabled CSRF protection, thus opening up the security vulnerability with one extra line of code. 
 
-* A8 - Cross Site Request Forgery
-The first insecurity is a lack of [CSRF](https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF)) tokens on the application, leading to a problem in places such as the password changing page of the application. This vulnerability can be noticed Since the application does not even ask you to enter your last password, this is an ideal attack vector for any malicious agents. To test out this vulnerability, I have enclosed an HTML file, which contains a form that acts on the web application, thus showing the vulnerability in action. If you have Maven configured differently, simply change the URL on which the form acts. 
+* A8 - [Cross Site Request Forgery](https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF)
+The first insecurity is a lack of [CSRF](https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF)) tokens on the application, leading to a problem in places such as the password changing page of the application. This vulnerability can be noticed Since the application does not even ask you to enter your last password, this is an ideal attack vector for any malicious agents. To test out this vulnerability, I have enclosed an HTML file, which contains a form that acts on the web application, thus showing the vulnerability in action. These forms are on the last two pictures, the ones that look like clickbait ads. If you have Maven configured differently, simply change the URL on which the form acts. Hopefully you will not get around to grading this until I have made the CSS a bit better. 
 
-* A3 - Cross Site Scripting
+* A3 - [Cross Site Scripting](https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_(XSS))
 The second insecurity is the usage of unsigned text rather than signed text for displaying user- entered information. This allows users to embed HTML into the page (try entering `<script> alert("Hello World"); </script>` into one of the new post fields), creating an [XSS](https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_(XSS)) vulnerability, again opening up an attack vector.
 
-* A4 - Insecure Direct Object References
+* A4 - [Insecure Direct Object References](https://www.owasp.org/index.php/Top_10_2013-A4-Insecure_Direct_Object_References)
 This insecurity lies in the fact that the post editing pages are referred to directly by URL, with the url being http://localhost:8080/edit/{the number of the post}. This means that, if a user correctly guesses the number of a post, he or she can edit any post that they would like, not just the ones that they are allowed to. Also, because of the way that the site is set up, it is impossible to determine who edited the post, or even whether the post was edited at all. To test out this vulnerability, try changing the number that comes after the URL extension `/change`, such as `/change/0`. It should be noted, however, that only authenticated users are allowed to access the editing page, so you must log in before you try to test this vulnerability.
 
-* A7 - Missing Function Level Access Control
+* A7 - [Missing Function Level Access Control](https://www.owasp.org/index.php/Top_10_2013-A7-Missing_Function_Level_Access_Control)
 This insecurity exists because any authenticated user is allowed to access the admin page. While only admin level users have a hyperlink to the admin page, any user can access the admin page by simply changing the URL extension to `\admin`. 
-
-In later versions, I will be introducing [insecure direct object references](https://www.owasp.org/index.php/Top_10_2013-A4-Insecure_Direct_Object_References), [unvalidated redirects and forwards](https://www.owasp.org/index.php/Top_10_2013-A10-Unvalidated_Redirects_and_Forwards), and, perhaps, [injection](https://www.owasp.org/index.php/Top_10_2013-A1-Injection) attack vectors.
 
 ### Fixing these Vulnerabilities
 
