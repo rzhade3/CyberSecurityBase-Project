@@ -54,4 +54,12 @@ public class AccountController {
         accountRepository.save(account);
         return "redirect:/admin";
     }
+
+    @RequestMapping(value = "/admin/{id}", method = RequestMethod.PATCH)
+    public String removeAdmin(@PathVariable long id) {
+        Account account = accountRepository.findOne(id);
+        account.removeAdmin();
+        accountRepository.save(account);
+        return "redirect:/admin";
+    }
 }

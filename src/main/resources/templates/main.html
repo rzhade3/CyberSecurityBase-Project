@@ -6,20 +6,22 @@
     <body>
         <div th:replace="fragments/header :: 'notLoggedIn'"></div>
         
-        <h1> Home </h1>
+        <h1>Home</h1>
 
-        <ul>
-            <!-- If you're looking through the code, this is the location of 
-            the XSS vulnerability (instead of having a text element, there is a 
-            utext element, which introduces the vulnerability -->
-            <li th:each="post : ${posts}">
-                <span th:utext="${post.title}" class="postTitle">TITLE</span>
-                <br/> 
-                <span th:utext="${post.content}" class="postContent">Content</span>
-                <br/>
-                <span th:text="${post.account.username}" class="username">Username</span>
-            </li>
-        </ul>
+        <div class="bodyForm">
+            <ul class="posts">
+                <!-- If you're looking through the code, this is the location of 
+                the XSS vulnerability (instead of having a text element, there is a 
+                utext element, which introduces the vulnerability -->
+                <li th:each="post : ${posts}">
+                    <span th:utext="${post.title}" class="postTitle">TITLE</span>
+                    <br/> 
+                    <span th:utext="${post.content}" class="postContent">Content</span>
+                    <br/>
+                    - <span th:text="${post.account.username}" class="username">Username</span>
+                </li>
+            </ul>
+        </div>
         
         <div th:replace="fragments/header :: footer">
             <p> The footer goes here </p>

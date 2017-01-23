@@ -45,6 +45,10 @@ public class Account extends AbstractPersistable<Long> {
         this.isAdmin = true;
     }
     
+    public void removeAdmin() {
+        this.isAdmin = false;
+    }
+    
     public boolean isAdmin() {
         return this.isAdmin;
     }

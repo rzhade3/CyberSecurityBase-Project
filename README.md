@@ -16,7 +16,7 @@ It should be noted that this application was created primarily as a security tes
 
 Since I built this application using Thymeleaf and Spring Security, both quite security minded frameworks, creating security vulnerabilities in my application was sometimes more difficult than making a secure application. You might notice this while looking through the source code, as I give the exact location of where the vulnerability was introduced. For example, in the Security Configuration file, on line 24, I disabled CSRF protection, thus opening up the security vulnerability with one extra line of code. 
 
-* A8 - [Cross Site Request Forgery](https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF)
+* A8 - [Cross Site Request Forgery](https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF))
 The first insecurity is a lack of [CSRF](https://www.owasp.org/index.php/Top_10_2013-A8-Cross-Site_Request_Forgery_(CSRF)) tokens on the application, leading to a problem in places such as the password changing page of the application. This vulnerability can be noticed Since the application does not even ask you to enter your last password, this is an ideal attack vector for any malicious agents. To test out this vulnerability, I have enclosed an HTML file, which contains a form that acts on the web application, thus showing the vulnerability in action. These forms are on the last two pictures, the ones that look like clickbait ads. If you have Maven configured differently, simply change the URL on which the form acts. Hopefully you will not get around to grading this until I have made the CSS a bit better. 
 
 * A3 - [Cross Site Scripting](https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_(XSS))
@@ -26,7 +26,10 @@ The second insecurity is the usage of unsigned text rather than signed text for 
 This insecurity lies in the fact that the post editing pages are referred to directly by URL, with the url being http://localhost:8080/edit/{the number of the post}. This means that, if a user correctly guesses the number of a post, he or she can edit any post that they would like, not just the ones that they are allowed to. Also, because of the way that the site is set up, it is impossible to determine who edited the post, or even whether the post was edited at all. To test out this vulnerability, try changing the number that comes after the URL extension `/change`, such as `/change/0`. It should be noted, however, that only authenticated users are allowed to access the editing page, so you must log in before you try to test this vulnerability.
 
 * A7 - [Missing Function Level Access Control](https://www.owasp.org/index.php/Top_10_2013-A7-Missing_Function_Level_Access_Control)
-This insecurity exists because any authenticated user is allowed to access the admin page. While only admin level users have a hyperlink to the admin page, any user can access the admin page by simply changing the URL extension to `\admin`. 
+This insecurity exists because any authenticated user is allowed to access the admin page. While only admin level users have a hyperlink to the admin page, any user can access the admin page by simply changing the URL extension to `\admin`.
+
+* A5 - [Security Misconfiguration](https://www.owasp.org/index.php/Top_10_2013-A5-Security_Misconfiguration)
+This vulnerability exists because of the other vulnerabilities present in the application, notably the CSRF vulnerability, as well as the numerous errors in business logic. 
 
 ### Fixing these Vulnerabilities
 
@@ -46,3 +49,7 @@ Fixing most of these vulnerabilities is a cinch because of Spring Security. Most
 * Missing Function Level Access Control
 
 	To rectify this vulnerability, one simply needs to change the security configuration in the SecurityConfiguration.java file. Remove `"/admin", "/admin/**"` from the antMatchers method, and then create a new method `"antMatchers("/admin", "\admin/**").hasRole("ADMIN")` below. This will check to see if the authenticated user is an admin level user, and only allow them to access the admin page. 
+
+* Security Misconfiguration
+
+	To fix this vulnerability, one needs to correct all of the previous errors, and fix the business logic of the code. One notable patch for the business logic would be to add a feature making it impossible to revoke admin privileges for one user, and to make it impossible to delete oneself as a user.
