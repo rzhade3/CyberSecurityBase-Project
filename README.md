@@ -29,7 +29,7 @@ This insecurity lies in the fact that the post editing pages are referred to dir
 This insecurity exists because any authenticated user is allowed to access the admin page. While only admin level users have a hyperlink to the admin page, any user can access the admin page by simply changing the URL extension to `\admin`.
 
 * A5 - [Security Misconfiguration](https://www.owasp.org/index.php/Top_10_2013-A5-Security_Misconfiguration)
-This vulnerability exists because of the other vulnerabilities present in the application, notably the CSRF vulnerability, as well as the numerous errors in business logic. 
+This vulnerability exists because of the other vulnerabilities present in the application, notably the CSRF vulnerability, as well as the numerous errors in business logic. Also, you may notice that `/h2-console/` is open to all users. 
 
 ### Fixing these Vulnerabilities
 
